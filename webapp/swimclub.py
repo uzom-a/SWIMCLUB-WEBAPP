@@ -1,7 +1,7 @@
+import os
 import statistics #helps us find the average
 import hfpy_utils #this is a open source module
-import webbrowser
-import os
+
 
 CHARTS = "charts/"
 
@@ -24,7 +24,7 @@ def read_swim_data(filename):
     mins_secs, hundredths = f"{(average / 100):.2f}".split(".")
     mins = int(mins_secs)
     minutes= mins // 60
-    second = mins - minutes*60
+    seconds = mins - minutes*60
     average = f"{minutes}:{seconds:0>2}.{hundredths}"
     return swimmer, age, distance, stroke, times, average, converts 
 
@@ -34,8 +34,8 @@ def produce_bar_chart(fn, location=CHARTS):
     from_max = max(converts)
     times.reverse()
     converts.reverse()
-    title = f"{swimmer} (Under {age}) {distance} {stroke}"
-    header = f"""<!DOCTYPE html>
+    title = f"{swimmer} (Under {age}) {distance} {stroke}" #this is the kind of f string that does not need to be in a straight line
+    header = f"""<!DOCTYPE html> 
                    <html>
                       <head>
                            <title>{title}</title>
@@ -53,9 +53,8 @@ def produce_bar_chart(fn, location=CHARTS):
                      <p>Average time:{average}</p>
                   </body>
                </html>"""
-       page = header + body + footer
-       save_to = f"{location}{fn.removesuffix('.txt')}.html"
-       with open(save_to, "w") as sf:
-            print(page, file=sf)
-
-    return save_to  
+       html_content = header + body + footer
+    chart_filename = os.path.join(location, f"{swimmer}-{distance}-{stroke}.html")
+    with open(chart_filename, 'w') as f:
+        f.write(html_content)
+    return chart_filename
