@@ -7,8 +7,19 @@ CHARTS = "charts/"
 
 FOLDER = "swimdata/"
 
-def read_swim_data(filename):    
-    swimmer, age, distance, stroke = filename.removesuffix(".txt").split("-")
+def read_swim_data(filename):  
+    stripped_filename = filename.removesuffix(".txt")
+    # Check if the format is correct
+    parts = stripped_filename.split("-")
+    if len(parts) == 4:
+        swimmer, age, distance, stroke = parts
+        # Continue processing
+    else:
+        print(f"Error: Expected 4 parts in the filename, but got {len(parts)} in {filename}")
+  
+    error_name = filename.removesuffix(".txt").split("-")
+    print(f"ERROR: {error_name}")
+    swimmer, age, distance, stroke = error_name
     with open(FOLDER+filename) as df:
         times = df.readlines()[0].strip().split(",")
     converts=[]
@@ -39,6 +50,7 @@ def produce_bar_chart(fn, location=CHARTS):
                    <html>
                       <head>
                            <title>{title}</title>
+                           <link rel="stylesheet" href="/static/webapp.css"/>
                            </head>
                            <body>
                                <h3>{title}</h3>"""

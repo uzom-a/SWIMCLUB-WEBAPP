@@ -2,9 +2,10 @@
 <html>
     <head>
         <title>{{title}}</title>
-    </head>
+      <!-- The code below uses rel to show the relationship between the current webpage and the attached document -->
+        <link rel="stylesheet" href="/static/webapp.css"/> 
     <body>
-        <h3>{{title}}</h3>
+        <h2>{{title}}</h2>
         <p>
            {% block body %} 
            {% endblock %}
