@@ -9,19 +9,15 @@ FOLDER = "swimdata/"
 
 def read_swim_data(filename):  
     stripped_filename = filename.removesuffix(".txt")
-    # Check if the format is correct
+    
     parts = stripped_filename.split("-")
     if len(parts) == 4:
         swimmer, age, distance, stroke = parts
-        # Continue processing
-    else:
-        print(f"Error: Expected 4 parts in the filename, but got {len(parts)} in {filename}")
-  
-    error_name = filename.removesuffix(".txt").split("-")
-    print(f"ERROR: {error_name}")
-    swimmer, age, distance, stroke = error_name
+    
+
     with open(FOLDER+filename) as df:
         times = df.readlines()[0].strip().split(",")
+        df.read
     converts=[]
     for t in times:
         if ":" in t:
@@ -61,11 +57,11 @@ def produce_bar_chart(fn, location=CHARTS):
                             <svg height="30" width="400">
                                 <rect height="30" width="{bar_width}" style="fill:rgb(0,0,255);" />
                             </svg>{t}<br />"""
-       footer = f"""
+    footer = f"""
                      <p>Average time:{average}</p>
                   </body>
                </html>"""
-       html_content = header + body + footer
+    html_content = header + body + footer
     chart_filename = os.path.join(location, f"{swimmer}-{distance}-{stroke}.html")
     with open(chart_filename, 'w') as f:
         f.write(html_content)
