@@ -136,7 +136,7 @@ def BinaryToHexadeximal():
 
 def HexadecimalToBinary():
     # hexadecimal = list(input("Enter the hexadecimal(must be uppercase):"))
-    decimal = HexadecimalToDecimal(hexadecimal)
+    decimal = HexadecimalToDecimal()
     return DecimalToBinary(decimal)
 
 
