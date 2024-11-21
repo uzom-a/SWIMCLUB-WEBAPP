@@ -76,9 +76,6 @@ def HexadecimalToDecimal():
 
         if last_digit == "A":
             last_digit = 10
-        elif last_digit.islower():
-            print("Invalid input")
-            break
         elif last_digit == "B":
             last_digit = 11
         elif last_digit == "C":
@@ -92,7 +89,8 @@ def HexadecimalToDecimal():
         output = int(last_digit) * (16 ** power) + output
         power += 1
     return output 
-    
+
+     
 
 
 # Convert Binary to Hexadecimal
