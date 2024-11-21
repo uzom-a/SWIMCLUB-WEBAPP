@@ -10,16 +10,16 @@ convert = int(input('''Enter
 
 
 # Convert Decimal to Binary
-def DecimalToBinary(number):
-    if number == None:
+def DecimalToBinary(number=None):
+    if not number:
         number = int(input("Enter a decimal number: "))
     remainder = []
     while number != 0:
         remainder.append(number % 2)
         number = number // 2
-        result = remainder[::-1]
-        for num in result:
-            answer = print(num, end="")
+    result = remainder[::-1]
+    for num in result:
+        answer = print(num, end="")
     return answer
     
 
@@ -39,14 +39,14 @@ def BinaryToDecimal():
 
 #Convert Decimal to Hexadecimal
 def DecimalToHexadecimal():
-    number = int(input("Enter the decimanl number: "))
+    number = int(input("Enter the decimal number: "))
     if number == 0:
         return "0"
 
     hexadecimal = ""
 
     while number > 0:
-        remainder = int(number) % 16 
+        remainder = number % 16 
         if remainder < 10:
             hexadecimal = str(remainder) + hexadecimal
         elif remainder == 10:
@@ -67,15 +67,18 @@ def DecimalToHexadecimal():
 
 
 #Convert Hexadecimal to Decimal
-def HexadecimalToDecimal(number):
-    if number == None:
-        number = list(input("Enter the Hexadecimal(must be uppercase): "))  #made the user input into a list so that we can pop it
+def HexadecimalToDecimal():
+    number = list(input("Enter the Hexadecimal(must be uppercase): "))  #made the user input into a list so that we can pop it
     power = 0
     output = 0
     while number:
         last_digit = number.pop()
+
         if last_digit == "A":
             last_digit = 10
+        elif last_digit.islower():
+            print("Invalid input")
+            break
         elif last_digit == "B":
             last_digit = 11
         elif last_digit == "C":
@@ -88,7 +91,7 @@ def HexadecimalToDecimal(number):
             last_digit = 15   
         output = int(last_digit) * (16 ** power) + output
         power += 1
-    return output
+    return output 
     
 
 
@@ -101,7 +104,7 @@ def BinaryToHexadeximal():
     while len(binary) % 4 != 0:
         binary = "0" + binary
     
-        hexadecimal = ""
+    hexadecimal = ""
 
     for x in range(0, len(binary), 4):
         group = binary[x: x + 4]
@@ -109,30 +112,30 @@ def BinaryToHexadeximal():
         power = 3
         output = 0
 
-    for digit in group:
-        output += int(digit) * (2 ** power)
-        power -= 1
+        for digit in group:
+           output += int(digit) * (2 ** power)
+           power -= 1
                 
-    if output < 10:
-        hexadecimal += str(output)
-    elif output == 10:
-        hexadecimal += "A"
-    elif output == 11:
-        hexadecimal += "B"
-    elif output == 12:
-        hexadecimal += "C"
-    elif output == 13:
-        hexadecimal += "D"
-    elif output == 14:
-        hexadecimal += "E"
-    elif output == 15:
-        hexadecimal += "F"
+        if output < 10:
+            hexadecimal += str(output)
+        elif output == 10:
+            hexadecimal += "A"
+        elif output == 11:
+            hexadecimal += "B"
+        elif output == 12:
+            hexadecimal += "C"
+        elif output == 13:
+            hexadecimal += "D"
+        elif output == 14:
+            hexadecimal += "E"
+        elif output == 15:
+            hexadecimal += "F"
     return hexadecimal
 
 
 
 def HexadecimalToBinary():
-    hexadecimal = list(input("Enter the hexadecimal(must be uppercase):"))
+    # hexadecimal = list(input("Enter the hexadecimal(must be uppercase):"))
     decimal = HexadecimalToDecimal(hexadecimal)
     return DecimalToBinary(decimal)
 
@@ -148,7 +151,7 @@ elif convert == 4:
 elif convert == 5:
     print(BinaryToHexadeximal())    
 elif convert == 6:
-     HexadecimalToBinary()
+    HexadecimalToBinary()
 else:
     print("Invalid output")
 
